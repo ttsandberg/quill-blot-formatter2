@@ -116,10 +116,11 @@ class ImageAlignAttributor extends ClassAttributor {
         }
     }
     value(node) {
-        console.log('align formats called');
+        console.log('align formats called', node);
         const className = super.value(node);
         const title = node.getAttribute('data-title') || '';
         let width = (node instanceof HTMLElement) ? node.style.getPropertyValue('--resize-width') : '';
+        console.log('node width', width);
         // attempt fallback value for images aligned pre-version 2.2
         if (!parseFloat(width) && node.firstChild instanceof HTMLElement) {
             width = node.firstChild.getAttribute('width') || '';
