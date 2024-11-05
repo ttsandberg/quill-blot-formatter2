@@ -23,7 +23,7 @@ interface ImageAlignValue extends ImageAlignInputValue {
 }
 declare class ImageAlignAttributor extends ClassAttributor {
     constructor();
-    add(node: Element, value: ImageAlignInputValue): boolean;
+    add(node: Element, value: ImageAlignValue): boolean;
     remove(node: Element): void;
     value(node: Element): ImageAlignValue;
 }
