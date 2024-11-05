@@ -101,7 +101,9 @@ class ImageAlignAttributor extends ClassAttributor {
       // set width style property on wrapper if image and has imageAlign format
       // fallback to image natural width if width attribute missing (image not resized))
       // width needed to size wrapper correctly via css
+      console.log('add firstChild', node.firstChild);
       let width: string | null = node.firstChild.getAttribute('width');
+      console.log('add firstChild width', width);
       if (!width) {
         console.log('first child no wifth in add');
         if (node.firstChild instanceof HTMLImageElement) {
