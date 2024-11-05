@@ -68,6 +68,8 @@ class ImageAlignAttributor extends ClassAttributor {
         });
     }
     add(node, value) {
+        console.log('add called', node);
+        console.log('add value', value);
         if (node instanceof HTMLElement && node.firstChild instanceof HTMLElement) {
             if (typeof value === 'object') {
                 super.add(node, value.align);
@@ -88,9 +90,10 @@ class ImageAlignAttributor extends ClassAttributor {
             // set width style property on wrapper if image and has imageAlign format
             // fallback to image natural width if width attribute missing (image not resized))
             // width needed to size wrapper correctly via css
-            console.log('add firstChild', node.firstChild);
+            console.log('add firstChild', { ...node.firstChild });
+            console.log('add firstChild width 1', node.firstChild.getAttribute('width'));
             let width = node.firstChild.getAttribute('width');
-            console.log('add firstChild width', width);
+            console.log('add firstChild width 2', width);
             if (!width) {
                 console.log('first child no wifth in add');
                 if (node.firstChild instanceof HTMLImageElement) {
