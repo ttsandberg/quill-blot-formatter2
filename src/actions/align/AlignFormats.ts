@@ -103,6 +103,7 @@ class ImageAlignAttributor extends ClassAttributor {
       // width needed to size wrapper correctly via css
       let width: string | null = node.firstChild.getAttribute('width');
       if (!width) {
+        console.log('first child no wifth in add');
         if (node.firstChild instanceof HTMLImageElement) {
           width = `${node.firstChild.naturalWidth}px`;
         } else {
@@ -128,17 +129,22 @@ class ImageAlignAttributor extends ClassAttributor {
   }
 
   value(node: Element): ImageAlignValue {
+    console.log('align formats called');
     const className = super.value(node);
     const title: string = node.getAttribute('data-title') || '';
     let width: string = (node instanceof HTMLElement) ? node.style.getPropertyValue('--resize-width') : '';
     // attempt fallback value for images aligned pre-version 2.2
     if (!parseFloat(width) && node.firstChild instanceof HTMLElement) {
       width = node.firstChild.getAttribute('width') || '';
+      console.log('no width, falling back to first child');
       if (!parseFloat(width) && node.firstChild instanceof HTMLImageElement) {
+        console.log('no width, falling back to first natural');
         if (node.firstChild.complete) {
+          console.log('first child complete');
           width = `${node.firstChild.naturalWidth}px`;
         } else {
           node.firstChild.onload = () => {
+            console.log('first child not complete');
             width = `${(node.firstChild as HTMLImageElement).naturalWidth}px`;
             (node as HTMLElement).style.setProperty('--resize-width', width);
             (node.firstChild as HTMLImageElement).setAttribute('width', width);
