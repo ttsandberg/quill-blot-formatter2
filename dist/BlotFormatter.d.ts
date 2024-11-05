@@ -1,0 +1,35 @@
+import { Options } from './Options';
+import Action from './actions/Action';
+import BlotSpec from './specs/BlotSpec';
+import Toolbar from './actions/toolbar/Toolbar';
+export default class BlotFormatter {
+    quill: any;
+    options: Options;
+    currentSpec: BlotSpec | null;
+    specs: BlotSpec[];
+    overlay: HTMLElement;
+    toolbar: Toolbar;
+    sizeInfo: HTMLElement;
+    actions: Action[];
+    startX: number;
+    startY: number;
+    constructor(quill: any, options?: Partial<Options>);
+    show(spec: BlotSpec): void;
+    hide(): void;
+    update(): void;
+    createActions(spec: BlotSpec): void;
+    destroyActions(): void;
+    private createOverlay;
+    private addEventListeners;
+    private repositionOverlay;
+    private setUserSelect;
+    private onDocumentPointerDown;
+    private onClick;
+    passWheelEventThrough: (event: WheelEvent) => void;
+    onTouchScrollStart: (event: TouchEvent) => void;
+    onTouchScrollMove: (event: TouchEvent) => void;
+    onOverlayTouchScrollMove: (event: TouchEvent) => void;
+    registerCustomBlots(): void;
+    keyboardBindings(): void;
+    useRelative(targetElement: HTMLElement): boolean;
+}
