@@ -92,9 +92,9 @@ class ImageAlignAttributor extends ClassAttributor {
             // width needed to size wrapper correctly via css
             console.log('add firstChild', { ...node.firstChild });
             console.log('add firstChild', [...node.childNodes]);
-            console.log('add firstChild attributes', node.attributes);
+            console.log('add firstChild attributes', node.firstChild.attributes);
             console.log('add firstChild width 1', node.firstChild.getAttribute('width'));
-            let width = `${node.firstChild.width}px`;
+            let width = node.firstChild.width ? `${node.firstChild.width}px` : null;
             console.log('add firstChild width 2', width);
             if (!width) {
                 console.log('first child no wifth in add');
