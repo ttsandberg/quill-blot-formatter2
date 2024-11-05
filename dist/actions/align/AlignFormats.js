@@ -94,20 +94,26 @@ class ImageAlignAttributor extends ClassAttributor {
             console.log('add firstChild', [...node.childNodes]);
             console.log('add firstChild attributes', node.firstChild.attributes);
             console.log('add firstChild width 1', node.firstChild.getAttribute('width'));
-            let width = node.firstChild.style.width;
-            console.log('add firstChild width 2', width);
-            if (!width) {
-                console.log('first child no wifth in add');
-                if (node.firstChild instanceof HTMLImageElement) {
-                    width = `${node.firstChild.naturalWidth}px`;
+            node.firstChild.addEventListener("load", () => {
+                if (node.firstChild) {
+                    const firstChild = node.firstChild;
+                    console.log("width after load", firstChild.getAttribute("width")); // Should reliably give "260px"
+                    let width = firstChild.getAttribute('width');
+                    console.log('add firstChild width 2', width);
+                    if (!width) {
+                        console.log('first child no wifth in add');
+                        if (firstChild instanceof HTMLImageElement) {
+                            width = `${firstChild.naturalWidth}px`;
+                        }
+                        else {
+                            width = `${firstChild.clientWidth}px`;
+                        }
+                        firstChild.setAttribute('width', width);
+                    }
+                    node.style.setProperty('--resize-width', width);
+                    node.setAttribute('data-relative-size', `${width?.endsWith('%')}`);
                 }
-                else {
-                    width = `${node.firstChild.clientWidth}px`;
-                }
-                node.firstChild.setAttribute('width', width);
-            }
-            node.style.setProperty('--resize-width', width);
-            node.setAttribute('data-relative-size', `${width?.endsWith('%')}`);
+            });
             return true;
         }
         else {
