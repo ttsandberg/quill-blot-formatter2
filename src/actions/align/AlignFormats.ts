@@ -107,7 +107,7 @@ class ImageAlignAttributor extends ClassAttributor {
       console.log('add firstChild', [ ...node.childNodes ]);
       console.log('add firstChild attributes', node.firstChild.attributes);
       console.log('add firstChild width 1', node.firstChild.getAttribute('width'));
-      let width: string | null = (node.firstChild as HTMLImageElement).width ? `${(node.firstChild as HTMLImageElement).width}px` : null;
+      let width: string | null = node.firstChild.style.width;
       console.log('add firstChild width 2', width);
       if (!width) {
         console.log('first child no wifth in add');
